@@ -6,21 +6,23 @@ from phi.tools.yfinance import YFinanceTools
 from phi.tools.duckduckgo import DuckDuckGo #Enables Agent to search the web for information
 
 import os
+from dotenv import load_dotenv
+load_dotenv()
 import pathlib
 from phi.playground import Playground,serve_playground_app
 
 #Import API Keys for PHIDATA and GROQ
 #if using google colab
-from google.colab import userdata
-GROQ_API_KEY=userdata.get('GROQ_API_KEY')
-PHI_API_KEY=userdata.get('PHI_API_KEY')
+#from google.colab import userdata
+#GROQ_API_KEY=userdata.get('GROQ_API_KEY')
+#PHI_API_KEY=userdata.get('PHI_API_KEY')
 
 #os.environ["GROQ_API_KEY"] = GROQ_API_KEY # Setting the Groq API key as an environment variable
 #os.environ["PHI_API_KEY"] = PHI_API_KEY # Setting the Groq API key as an environment variable
 
-phi.api = GROQ_API_KEY
-#os.environ["GROQ_API_KEY"] = GROQ_API_KEY # Setting the Groq API key as an environment variable
-os.environ["PHI_API_KEY"] = PHI_API_KEY # Setting the Groq API key as an environment variable
+phi.api = os.getenv('PHI_API_KEY')
+GROQ_API_KEY = os.getenv('GROQ_API_KEY')
+
 
 ## Web search Agent 
 web_search_agent = Agent(
